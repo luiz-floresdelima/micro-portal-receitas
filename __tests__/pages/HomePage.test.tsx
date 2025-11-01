@@ -15,7 +15,7 @@ describe('Home Page', () => {
     jest.clearAllMocks();
   });
 
-  afterEach(cleanup); 
+  afterEach(cleanup);
 
   it('should render correctly', async () => {
     render(await HomePage())
