@@ -1,5 +1,3 @@
-import { generateRecipeLdJson } from "@/lib/ld-json";
-
 export const mockGenerateItemListLdJson = jest.fn().mockReturnValue({
   "@context": "https://schema.org",
   "@type": "ItemList",

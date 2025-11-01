@@ -1,24 +1,24 @@
+import { getAllTags } from "@/lib/tags";
+import { getRecipesByTag } from "@/lib/recipes";
 import RecipeCard from "@/components/RecipeCard";
-import { constants } from "@/data/constants";
-import { getAllCategories } from "@/lib/categories";
 import { generateBreadcrumbList, generateItemListLdJson } from "@/lib/ld-json";
-import { getRecipesByCategory } from "@/lib/recipes";
-import { CategoryPageProps } from "@/types/category";
+import { TagPageProps } from "@/types/tag";
 import { Metadata } from "next";
+import { constants } from "@/data/constants";
 
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const categories = await getAllCategories();
-  return categories.map((category) => ({
-    category: category.slug,
+  const categories = await getAllTags();
+  return categories.map((tag) => ({
+    tag: tag.slug,
   }));
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const { category } = await params;
-  const title = `Receitas de ${category.charAt(0).toUpperCase() + category.slice(1)} | ${constants.SITE_NAME}`;
-  const description = `Confira deliciosas receitas de ${category}. Encontre ideias e inspirações para seu cardápio.`;
+export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+  const { tag } = await params;
+  const title = `Receitas de ${tag.charAt(0).toUpperCase() + tag.slice(1)} | ${constants.SITE_NAME}`;
+  const description = `Confira deliciosas receitas de ${tag}. Encontre ideias e inspirações para seu cardápio.`;
 
   return {
     title,
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     openGraph: {
       title,
       description,
-      url: `/category/${category}`,
+      url: `/tags/${tag}`,
       type: "website",
     },
     twitter: {
@@ -37,14 +37,14 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { category } = await params;
-  const recipes = await getRecipesByCategory(category);
+export default async function TagPage({ params }: TagPageProps ) {
+  const { tag } = await params;
+  const recipes = await getRecipesByTag(tag);
 
-  const itemListJsonLd = generateItemListLdJson(recipes, `Receitas de ${category}`);
+  const itemListJsonLd = generateItemListLdJson(recipes, `Receitas de ${tag}`);
   const breadcrumbJsonLd = generateBreadcrumbList([
     { name: "Home", url: `${process.env.NEXT_PUBLIC_SITE_URL}` },
-    { name: category.charAt(0).toUpperCase() + category.slice(1), url: `${process.env.NEXT_PUBLIC_SITE_URL}/categorias/${category}` },
+    { name: tag.charAt(0).toUpperCase() + tag.slice(1), url: `${process.env.NEXT_PUBLIC_SITE_URL}/tags/${tag}` },
   ]);
 
   return (
@@ -58,7 +58,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <h1 className="text-2xl font-bold mb-4 capitalize">
-        Categoria: {category}
+        Tag: {tag}
       </h1>
 
       {recipes.length === 0 && (

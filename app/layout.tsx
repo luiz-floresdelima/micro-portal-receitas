@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { generateOrganizationLdJson, generateSiteNavigationLdJson, generateWebPage, generateWebSiteLdJson } from "@/lib/ld-json";
+import VerticalMenu from "@/components/VerticalMenu";
 
 export const metadata: Metadata = {
   title: "Portal de Receitas",
@@ -65,7 +66,12 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageJsonLd) }}
         />
         <Header />
-        <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
+        <div className="flex gap-6 max-w-7xl mx-auto flex-1 px-4 py-6">
+          <VerticalMenu />
+          <main className="flex-1 container mx-auto px-4 py-6">
+            {children}
+          </main>
+        </div>
         <Footer />
       </body>
     </html>

@@ -1,6 +1,6 @@
 import RecipeCard from "@/components/RecipeCard";
 import { constants } from "@/data/constants";
-import { generateBreadcrumbList, generateItemListLdJson, generateOrganizationLdJson, generateSiteNavigationLdJson, generateWebPage, generateWebSiteLdJson } from "@/lib/ld-json";
+import { generateBreadcrumbList, generateItemListLdJson } from "@/lib/ld-json";
 import { getAllRecipes } from "@/lib/recipes";
 import { Metadata } from "next";
 

@@ -2,6 +2,8 @@ import { generateBreadcrumbList, generateRecipeLdJson } from "@/lib/ld-json";
 import { getRecipeBySlug, getAllRecipes } from "@/lib/recipes";
 import { RecipePageProps } from "@/types/recipe";
 import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   const recipes = await getAllRecipes();
@@ -9,7 +11,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: RecipePageProps): Promise<Metadata> {
-  
+
   const { slug } = await params;
   const recipe = await getRecipeBySlug(slug);
   if (!recipe) {
@@ -47,8 +49,8 @@ export default async function RecipePage({ params }: RecipePageProps) {
   const recipeJsonLd = generateRecipeLdJson(recipe);
   const breadcrumbJsonLd = generateBreadcrumbList([
     { name: "Home", url: `${process.env.NEXT_PUBLIC_SITE_URL}` },
-    { name: `${recipe? recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1) : "Categoria"}`, url: `${process.env.NEXT_PUBLIC_SITE_URL}/categorias/${recipe?.category}` },
-    { name: `${recipe? recipe.title : "Receita"}`, url: `${process.env.NEXT_PUBLIC_SITE_URL}/receitas/${recipe?.slug}` },
+    { name: `${recipe ? recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1) : "Categoria"}`, url: `${process.env.NEXT_PUBLIC_SITE_URL}/categorias/${recipe?.category}` },
+    { name: `${recipe ? recipe.title : "Receita"}`, url: `${process.env.NEXT_PUBLIC_SITE_URL}/receitas/${recipe?.slug}` },
   ]);
 
   if (!recipe) {
@@ -65,10 +67,16 @@ export default async function RecipePage({ params }: RecipePageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <img
+      <Image
         src="https://placehold.co/600x400"
         alt={recipe.title}
         className="w-full h-64 object-cover rounded-xl mb-6"
+        width={600}
+        height={400}
+        unoptimized
+        title={recipe.title}
+        priority={true}
+        loading="eager"
       />
       <h1 className="text-3xl font-bold text-pink-600 mb-4">{recipe.title}</h1>
 
@@ -103,13 +111,15 @@ export default async function RecipePage({ params }: RecipePageProps) {
         <div className="mt-6">
           <h3 className="text-sm uppercase text-gray-500 mb-1">Tags:</h3>
           <div className="flex flex-wrap gap-2">
-            {recipe.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded-full"
-              >
-                #{tag}
-              </span>
+            {recipe.tags.map((tag: string, idx: number) => (
+              <Link href={`/tags/${tag}`} key={`${tag}-${idx}`}>
+                <span
+                  key={tag}
+                  className="bg-pink-100 text-pink-700 text-xs px-2 py-1 rounded-full"
+                >
+                  #{tag}
+                </span>
+              </Link>
             ))}
           </div>
         </div>

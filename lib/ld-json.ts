@@ -1,6 +1,7 @@
 import { constants } from "@/data/constants";
 import { RecipeDetails } from "@/types/recipe";
 import { getAllCategories } from "./categories";
+import { ItemListBase } from "@/types/item-list";
 
 const generateWebSiteLdJson = () => {
   return {
@@ -16,7 +17,7 @@ const generateWebSiteLdJson = () => {
   };
 }
 
-const generateItemListLdJson = (list: any[], description: string) => {
+const generateItemListLdJson = (list: ItemListBase[], description: string) => {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
