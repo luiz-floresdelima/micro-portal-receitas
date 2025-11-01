@@ -64,7 +64,7 @@ src/
 * **Home:** Exibe destaques e últimas receitas com carregamento estático (SSG).
 * **Página da Receita:** Renderiza dados individuais via **SSG**.
 * **Busca e Categoria:** Renderizadas com **ISR**, usando revalidate para simular atualização incremental (Server-side para busca).
-* **Menu Horizontal e Footer:** Componentes fixos e responsivos, com links e informações institucionais.
+* **Menus e Footer:** Componentes fixos e responsivos, com links e informações institucionais.
 * **SEO e Metatags:** Implementadas manualmente por página.
 * **Performance e Core Web Vitals:** Otimização via **SSG** e **ISR**.
 
