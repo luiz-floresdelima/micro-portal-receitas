@@ -18,7 +18,7 @@ Este projeto foi desenvolvido como parte de um **teste técnico**, com o objetiv
 ### 1️⃣ Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/mini-portal-receitas.git
+git clone https://github.com/luiz-floresdelima/micro-portal-receitas
 cd mini-portal-receitas
 ```
 
@@ -128,8 +128,8 @@ NEXT_PUBLIC_SITE_URL=https://seusite.com
 ## 🧑‍💻 Autor
 
 **Luiz Lima**
-📧 [[seu-email@exemplo.com](mailto:seu-email@exemplo.com)]
-🔗 [LinkedIn](https://linkedin.com/in/seu-perfil) | [GitHub](https://github.com/seu-usuario)
+📧 [[luizf.floresdelima@gmail.com](mailto:luizf.floresdelima@gmail.com)]
+🔗 [LinkedIn](https://www.linkedin.com/in/luizfloresdelima/) | [GitHub](https://github.com/luiz-floresdelima)
 
 ---
 
