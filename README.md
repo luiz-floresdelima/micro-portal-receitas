@@ -19,7 +19,7 @@ Este projeto foi desenvolvido como parte de um **teste técnico**, com o objetiv
 
 ```bash
 git clone https://github.com/luiz-floresdelima/micro-portal-receitas
-cd mini-portal-receitas
+cd micro-portal-receitas
 ```
 
 ### 2️⃣ Instalar dependências
@@ -107,7 +107,7 @@ NEXT_PUBLIC_SITE_URL=https://seusite.com
 | ------------------------------- | ------------------------------ | ----------- |
 | Home (`/`)                      | **SSG**                        | N/A         |
 | Receita (`/receita/[slug]`)     | **SSG**                        | N/A         |
-| Busca (`/busca`)                | **ISR (Server-side Simulado)** | 60 segundos |
+| Busca (`/busca`)                | **SSG + ISR**                  | 60 segundos |
 | Categoria (`/categoria/[slug]`) | **ISR**                        | 60 segundos |
 
 > O uso combinado de **SSG + ISR** garante alta performance, mantendo conteúdo atualizado sem prejudicar tempo de resposta.
